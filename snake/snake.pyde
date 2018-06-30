@@ -6,8 +6,7 @@ SCL = 30
 from random import randint
 import time
 import sys
-sys.path.append("..")
-from ..Snake import Snake
+import test
 
 def setup():
     size(WIDTH * SCL, HEIGHT * SCL)

@@ -21,7 +21,6 @@ def setup():
 
 
 def render(self):
-    """ PROCESSING CODE HERE """
     fill(150, 150, 150)
     rect(0, 0, width, height)
     

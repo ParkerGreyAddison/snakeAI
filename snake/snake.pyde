@@ -1,6 +1,7 @@
 HEIGHT = 20
 WIDTH = 20
 SCL = 30
+DISPLAY = True
 
 def setup():
     size(WIDTH * SCL, HEIGHT * SCL)
@@ -40,7 +41,8 @@ class Snake:
         self.__init__()
         self.init_snake()
         self.add_food()
-        self.render()
+        if DISPLAY:
+            self.render()
         return self.observe()
 
     def move(self, direction):
@@ -55,7 +57,8 @@ class Snake:
 
         self.gameover = self.check_gameover()
         
-        self.render()
+        if DISPLAY:
+            self.render()
 
         return self.observe()
 
@@ -152,7 +155,7 @@ class Snake:
         fill(255, 50, 50)
         rect(self.snake[0]['x'] * SCL, self.snake[0]['y'] * SCL, SCL, SCL)
         
-        time.sleep(0.1)
+        time.sleep(0.01)
         
 def draw():
     s.move(randint(0, 3))

@@ -23,7 +23,7 @@ class Snake:
             self.snake.append({'x':start_x - i, 'y':start_y})
 
     def new_game(self):
-        self.__init__()
+        self.__init__(self.h, self.w)
         self.init_snake()
         self.add_food()
         return self.observe()
@@ -75,11 +75,11 @@ class Snake:
         # - forwards, - left, - right,
         # to prevent turning back into itself
         if direction == 0:
-            new_x += 1
+            new_x -= 1
         elif direction == 1:
             new_y += 1
         elif direction == 2:
-            new_x -= 1
+            new_x += 1
         elif direction == 3:
             new_y -= 1
 

@@ -1,32 +1,56 @@
 from random import randint
 import time
 from Snake import Snake
-
 import tkinter as tk
-
-window = tk.Tk()
-window.title("Snake Game")
 
 HEIGHT = 20
 WIDTH = 20
 SCL = 30
 
-s = Snake(HEIGHT, WIDTH)
-s.new_game()
-s.render()
+window = tk.Tk()
+window.title("Snake Game")
+w = tk.Canvas(window, width=WIDTH*SCL, height=HEIGHT*SCL)
+w.pack()
 
-def render(self):
-    fill(150, 150, 150)
-    rect(0, 0, width, height)
-    
-    fill(255, 255, 255)
-    for segment in self.snake[1:]:
-        rect(segment['x'] * SCL, segment['y'] * SCL, SCL, SCL)
+class Display:
+
+    def __init__(self, canvas):
+        self.w = canvas
+        self.s = Snake(HEIGHT, WIDTH)
+        self.s.new_game()
+        self.render()
+
+    def render(self):
+        self.w.create_rectangle(0, 0,
+                                WIDTH*SCL, HEIGHT*SCL,
+                                fill="gray", outline="")
+
+        fx = self.s.food['x']
+        fy = self.s.food['y']
+        self.w.create_rectangle(fx*SCL, fy*SCL,
+                                (fx + 1)*SCL, (fy + 1)*SCL,
+                                fill="green2", outline="")
         
-    fill(0, 255, 0)
-    rect(self.food['x'] * SCL, self.food['y'] * SCL, SCL, SCL)
-    
-    fill(255, 50, 50)
-    rect(self.snake[0]['x'] * SCL, self.snake[0]['y'] * SCL, SCL, SCL)
-    
-    time.sleep(0.1)
+        for segment in self.s.snake[1:]:
+            x = segment['x']
+            y = segment['y']
+            self.w.create_rectangle(x*SCL, y*SCL,
+                                    (x + 1)*SCL, (y + 1)*SCL,
+                                    fill="white", outline="")
+
+        x = self.s.snake[0]['x']
+        y = self.s.snake[0]['y']
+        self.w.create_rectangle(x*SCL, y*SCL,
+                                (x + 1)*SCL, (y + 1)*SCL,
+                                fill="indian red", outline="")
+
+        
+        self.s.move(randint(0, 3))
+        if self.s.gameover:
+##            time.sleep(1)
+            self.s.new_game()
+        self.w.after(100, self.render)
+        
+        
+game = Display(w)
+window.mainloop()

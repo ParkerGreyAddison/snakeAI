@@ -71,6 +71,9 @@ class Snake:
         new_x = self.snake[0]['x']
         new_y = self.snake[0]['y']
 
+        # TODO: Possibly change so that new direction can be
+        # - forwards, - left, - right,
+        # to prevent turning back into itself
         if direction == 0:
             new_x += 1
         elif direction == 1:

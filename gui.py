@@ -21,30 +21,32 @@ class Display:
         self.render()
 
     def render(self):
+        # Draw the background
         self.w.create_rectangle(0, 0,
                                 WIDTH*SCL, HEIGHT*SCL,
                                 fill="gray", outline="")
-
+        # Draw the food
         fx = self.s.food['x']
         fy = self.s.food['y']
         self.w.create_rectangle(fx*SCL, fy*SCL,
                                 (fx + 1)*SCL, (fy + 1)*SCL,
                                 fill="green2", outline="")
-        
+
+        # Draw the body
         for segment in self.s.snake[1:]:
             x = segment['x']
             y = segment['y']
             self.w.create_rectangle(x*SCL, y*SCL,
                                     (x + 1)*SCL, (y + 1)*SCL,
                                     fill="white", outline="")
-
+        # Draw the head in a different color
         x = self.s.snake[0]['x']
         y = self.s.snake[0]['y']
         self.w.create_rectangle(x*SCL, y*SCL,
                                 (x + 1)*SCL, (y + 1)*SCL,
                                 fill="indian red", outline="")
 
-        
+        # Move, reset if gameover, then render next frame
         self.s.move(randint(0, 3))
         if self.s.gameover:
 ##            time.sleep(1)

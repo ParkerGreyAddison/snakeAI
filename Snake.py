@@ -3,7 +3,7 @@ import time
 
 class Snake:
 
-    START_LENGTH = 5
+    START_LENGTH = 3
 
     def __init__(self, HEIGHT=20, WIDTH=20):
         self.h = HEIGHT

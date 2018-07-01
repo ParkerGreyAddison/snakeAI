@@ -3,9 +3,18 @@ import time
 from Snake import Snake
 import tkinter as tk
 
-HEIGHT = 20
-WIDTH = 20
-SCL = 30
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("-vh", "--height", type=int, default=20,
+                    help="sets field height")
+parser.add_argument("-vw", "--width", type=int, default=20,
+                    help="sets field width")
+parser.add_argument("-s", "--scale", type=int, default=30,
+                    help="sets display scale")
+args = parser.parse_args()
+HEIGHT = args.height
+WIDTH = args.width
+SCL = args.scale
 
 window = tk.Tk()
 window.title("Snake Game")
